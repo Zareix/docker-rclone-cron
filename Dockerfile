@@ -1,6 +1,6 @@
 FROM alpine:3.20
 
-ARG RCLONE_VERSION=1.67.0
+ARG RCLONE_VERSION=1.68.1
 
 # install rclone
 RUN apk add --no-cache wget ca-certificates && \
