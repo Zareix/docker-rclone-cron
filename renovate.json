@@ -25,7 +25,7 @@
       ],
       "depNameTemplate": "rclone",
       "datasourceTemplate": "github-releases",
-      "registryUrlTemplate": "https://github.com/rclone/rclone"
+      "registryUrlTemplate": "https://github.com/rclone/rclone/releases/download/v{version}/rclone-v{version}-linux-{arch}.zip"
     }
   ],
   "forkProcessing": "enabled"
