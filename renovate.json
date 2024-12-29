@@ -21,7 +21,7 @@
         "Dockerfile"
       ],
       "matchStrings": [
-        "ENV RCLONE_VERSION=(?<currentValue>.*?)\\n"
+        "ARG RCLONE_VERSION=(?<currentValue>.*?)\\n"
       ],
       "depNameTemplate": "rclone/rclone",
       "datasourceTemplate": "github-releases"
