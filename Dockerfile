@@ -1,6 +1,6 @@
-FROM alpine:3.20
+FROM alpine:3.21
 
-ENV RCLONE_VERSION=1.68.1
+ENV RCLONE_VERSION=1.68.2
 ARG ARCH=amd64
 
 # install rclone
