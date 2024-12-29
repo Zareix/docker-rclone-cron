@@ -24,8 +24,7 @@
         "ENV RCLONE_VERSION=(?<currentValue>.*?)\\n"
       ],
       "depNameTemplate": "rclone/rclone",
-      "datasourceTemplate": "github-releases",
-      "registryUrlTemplate": "https://github.com/rclone/rclone/releases"
+      "datasourceTemplate": "github-releases"
     }
   ],
   "forkProcessing": "enabled"
