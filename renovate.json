@@ -23,7 +23,7 @@
       "matchStrings": [
         "ENV RCLONE_VERSION=(?<currentValue>.*?)\\n"
       ],
-      "depNameTemplate": "rclone/rclone",
+      "depNameTemplate": "tailscale/tailscale",
       "datasourceTemplate": "github-releases"
     }
   ],
