@@ -23,9 +23,9 @@
       "matchStrings": [
         "ENV RCLONE_VERSION=(?<currentValue>.*?)\\n"
       ],
-      "depNameTemplate": "rclone",
+      "depNameTemplate": "rclone/rclone",
       "datasourceTemplate": "github-releases",
-      "registryUrlTemplate": "https://github.com/rclone/rclone/releases/download/v{version}/rclone-v{version}-linux-{arch}.zip"
+      "registryUrlTemplate": "https://github.com/rclone/rclone/releases"
     }
   ],
   "forkProcessing": "enabled"
