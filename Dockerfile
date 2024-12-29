@@ -13,7 +13,7 @@ RUN apk add --no-cache wget ca-certificates && \
     apk del wget
 
 # install entrypoint
-ADD docker-entrypoint.sh /docker-entrypoint.sh
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
 # defaults env vars
