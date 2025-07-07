@@ -1,4 +1,4 @@
-FROM alpine:3.21
+FROM alpine:3.22
 
 ARG RCLONE_VERSION=1.68.2
 
