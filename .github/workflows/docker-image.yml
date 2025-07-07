@@ -1,73 +1,19 @@
-name: "Build docker image"
+name: Build docker image
 
 on:
   push:
-    branches: ["master"]
-
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: zareix/docker-rclone-cron
-  IMAGE_TAG: latest
+    branches:
+      - master
 
 jobs:
-  build:
-    name: Build docker image
-    runs-on: ubuntu-latest
+  docker:
+    name: Docker
     permissions:
       contents: read
       packages: write
       id-token: write
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install cosign
-        if: github.event_name != 'pull_request'
-        uses: sigstore/cosign-installer@main
-        with:
-          cosign-release: "v2.0.0-rc.0"
-
-      - name: Setup Docker buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log into registry ${{ env.REGISTRY }}
-        if: github.event_name != 'pull_request'
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Extract Docker metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
-
-      - name: Build and push Docker image for amd64
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          platforms: linux/amd64
-          build-args: |
-            ARCH=amd64
-          
-      - name: Build and push Docker image for arm64
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          platforms: linux/arm64/v8
-          build-args: |
-            ARCH=arm64
+    uses: zareix/gh-actions/.github/workflows/docker.yml@main
+    with:
+      tag: latest
+      push-image: true
+      platforms: linux/amd64,linux/arm64

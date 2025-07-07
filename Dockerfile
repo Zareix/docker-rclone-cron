@@ -1,10 +1,18 @@
-FROM alpine:3.22
+FROM alpine:3.21
 
-ARG RCLONE_VERSION=1.70.2
-ARG ARCH=amd64
+ARG RCLONE_VERSION=1.68.2
 
 # install rclone
 RUN apk add --no-cache wget ca-certificates && \
+    ARCH=$(uname -m) && \
+    echo "Detected architecture: ${ARCH}" && \
+    case ${ARCH} in \
+    x86_64) ARCH="amd64" ;; \
+    aarch64) ARCH="arm64" ;; \
+    armv7l) ARCH="arm" ;; \
+    *) echo "Unsupported architecture: ${ARCH}" && exit 1 ;; \
+    esac && \
+    echo "Using rclone architecture: ${ARCH}" && \
     wget -q https://downloads.rclone.org/v${RCLONE_VERSION}/rclone-v${RCLONE_VERSION}-linux-${ARCH}.zip && \
     unzip rclone-v${RCLONE_VERSION}-linux-${ARCH}.zip && \
     mv rclone-v${RCLONE_VERSION}-linux-${ARCH}/rclone /usr/bin && \
