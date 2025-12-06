@@ -2,8 +2,7 @@ FROM alpine:3.23
 
 ARG RCLONE_VERSION=1.72.0
 
-# install rclone
-RUN apk add --no-cache wget ca-certificates curl && \
+RUN apk add --update wget ca-certificates curl && \
   ARCH=$(uname -m) && \
   echo "Detected architecture: ${ARCH}" && \
   case ${ARCH} in \
@@ -20,11 +19,9 @@ RUN apk add --no-cache wget ca-certificates curl && \
   rm -rf rclone-v${RCLONE_VERSION}-linux-${ARCH} && \
   apk del wget
 
-# install entrypoint
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
-# defaults env vars
 ENV CRON_SCHEDULE="0 0 * * *"
 ENV COMMAND="rclone version"
 
