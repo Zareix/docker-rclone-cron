@@ -1,6 +1,6 @@
 FROM alpine:3.22
 
-ARG RCLONE_VERSION=1.71.2
+ARG RCLONE_VERSION=1.72.0
 
 RUN apk add --no-cache wget ca-certificates && \
   ARCH=$(uname -m) && \
